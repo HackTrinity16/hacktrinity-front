@@ -13,11 +13,13 @@ function Home() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle form submission logic here
+        const caseNumber = Math.floor(Math.random() * 1000);
+        localStorage.setItem('caseNumber', caseNumber+'/2024');
         console.log('Case Background:', caseBackground);
         console.log('Selected Role:', role);
         console.log('Number of Jury Members:', juryCount);
         console.log('Uploaded Document:', document);
-        navigate('/room', { state: { caseBackground, juryCount, role, document }});
+        navigate('/room', { state: { caseBackground, juryCount, role, document}});
     };
 
     const handleFileChange = (e) => {

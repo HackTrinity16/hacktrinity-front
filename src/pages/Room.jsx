@@ -5,8 +5,8 @@ import { Button } from '../components/button';
 import { Divider } from '../components/divider';
 import { Heading } from '../components/heading';
 import { Sidebar } from '../components/sidebar';
-import {useLocation, useNavigate} from 'react-router-dom';
-import {Textarea} from "../components/MyTextArea.jsx";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Textarea } from "../components/MyTextArea.jsx";
 
 import judgeImage from '../assets/people/judge.jpg';
 import jury1Image from '../assets/people/jury1.jpg';
@@ -15,6 +15,7 @@ import jury3Image from '../assets/people/jury3.jpg';
 import jury4Image from '../assets/people/jury4.jpg';
 import jury5Image from '../assets/people/jury5.jpg';
 import opponentImage from '../assets/people/opponent.jpg';
+import personImage from '../assets/people/person.jpg';
 
 function Room() {
     const location = useLocation();
@@ -22,9 +23,29 @@ function Room() {
     const { juryCount, role } = location.state || { juryCount: 5, role: 'defender' }; // Default values
 
     const juryImages = [jury1Image, jury2Image, jury3Image, jury4Image, jury5Image];
-    const juryMembers = Array.from({ length: juryCount }, (_, i) => (
-        <Avatar key={i} src={juryImages[i % juryImages.length]} alt={`AI Jury Member ${i + 1}`} initials={`JY${i + 1}`} className="w-16 h-16 rounded-full shadow-sm" />
-    ));
+
+    // Dynamically create jury members with different avatar sizes
+    const juryMembers = Array.from({ length: juryCount }, (_, i) => {
+        // Adjust avatar size based on jury count
+        let avatarSize;
+        if (juryCount <= 5) {
+            avatarSize = "w-24 h-24"; // Larger size for fewer jurors
+        } else if (juryCount <= 10) {
+            avatarSize = "w-20 h-20"; // Medium size
+        } else {
+            avatarSize = "w-16 h-16"; // Smaller size for more jurors
+        }
+
+        return (
+            <Avatar
+                key={i}
+                src={juryImages[i % juryImages.length]} // Use available images, cycling if necessary
+                alt={`AI Jury Member ${i + 1}`}
+                initials={`JY${i + 1}`}
+                className={`${avatarSize} rounded-full shadow-sm`} // Apply dynamic size
+            />
+        );
+    });
 
 
     return (
@@ -59,7 +80,7 @@ function Room() {
 
                     <section id="jury" className="mb-4 text-center">
                         <Heading level={2} className="text-4xl font-bold text-gray-700 mb-4">Jury</Heading>
-                        <div className="flex justify-center space-x-6">
+                        <div className="flex flex-wrap justify-center gap-4">
                             {juryMembers}
                         </div>
                     </section>
@@ -67,11 +88,10 @@ function Room() {
                     <Divider className="border-t border-gray-200 my-4"/>
 
                     <section id="defendant-opponent" className="mb-4 text-center">
-                        <Heading level={2} className="text-4xl font-bold text-gray-700 mb-4">Defendant and AI
-                            Opponent</Heading>
+                        <Heading level={2} className="text-4xl font-bold text-gray-700 mb-4">Litigants</Heading>
                         <div className="flex justify-center space-x-12">
                             <div className="flex flex-col items-center">
-                                <Avatar src="person.png" alt="Defendant" initials="P"
+                                <Avatar src={personImage} alt="Defendant" initials="P"
                                         className="w-28 h-28 mb-4 border-4 border-green-500 shadow-lg"/>
                                 <p className="text-lg text-gray-600">Defendant (You)</p>
                             </div>
