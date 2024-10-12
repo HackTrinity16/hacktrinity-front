@@ -63,7 +63,7 @@ function Witnesses() {
                             <div>
                                 <strong>{witness.name}</strong>: {witness.testimony}
                             </div>
-                            <Button onClick={() => handleRemoveWitness(index)} className="bg-red-500 text-white hover:bg-red-600 cursor-pointer p-1 rounded-lg">
+                            <Button color='red' onClick={() => handleRemoveWitness(index)} className="text-white hover: cursor-pointer p-1 rounded-lg">
                                 Remove
                             </Button>
                         </li>

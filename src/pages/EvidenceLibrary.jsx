@@ -47,7 +47,7 @@ function EvidenceLibrary() {
                     {documents.map((doc, index) => (
                         <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow-sm">
                             <span>{doc.name}</span>
-                            <Button className="bg-red-500 text-white hover:bg-red-600 cursor-pointer p-1 rounded-lg">
+                            <Button color='red' className=" text-white hover:cursor-pointer p-1 rounded-lg">
                                 Delete
                             </Button>
                         </li>

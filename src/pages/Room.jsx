@@ -94,7 +94,7 @@ function Room() {
                         rows="15"
                     ></textarea>
                     <Button color="gray" className="w-full bg-gray-200 text-gray-800 hover:bg-gray-300 mb-4 cursor-pointer" onClick={handleUseDocument}>Use a Document</Button>
-                    <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 cursor-pointer">Submit Defense</Button>
+                    <Button className="w-full text-white hover: cursor-pointer">Submit Defense</Button>
                     <Divider className="my-5 mt-2" />
                     <Button color="red" className="w-full cursor-pointer">Objection</Button>
                 </Sidebar>
