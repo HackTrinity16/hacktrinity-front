@@ -50,8 +50,8 @@ function Home() {
                     <input
                         id="juryCount"
                         type="range"
-                        min="1"
-                        max="20"
+                        min="3"
+                        max="19"
                         value={juryCount}
                         onChange={(e) => setJuryCount(e.target.value)}
                         className="w-full"

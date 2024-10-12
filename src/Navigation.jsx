@@ -38,8 +38,8 @@ function Navigation() {
                         <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Evidence Library</h2>
                     </NavbarItem>
                     <NavbarDivider />
-                    <NavbarItem href="#jury">
-                        <h2 className="text-gray-800">Other</h2>
+                    <NavbarItem onClick={() => navigate('/witnesses')}>
+                        <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Witnesses</h2>
                     </NavbarItem>
                 </NavbarSection>
             </Navbar>
