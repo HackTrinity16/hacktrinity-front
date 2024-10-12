@@ -17,7 +17,7 @@ function Home() {
         console.log('Selected Role:', role);
         console.log('Number of Jury Members:', juryCount);
         console.log('Uploaded Document:', document);
-        navigate('/room');
+        navigate('/room', { state: { caseBackground, juryCount, role, document }});
     };
 
     const handleFileChange = (e) => {

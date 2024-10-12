@@ -5,7 +5,7 @@ import { Button } from '../components/button';
 import { Divider } from '../components/divider';
 import { Heading } from '../components/heading';
 import { Sidebar } from '../components/sidebar';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {Textarea} from "../components/MyTextArea.jsx";
 
 import judgeImage from '../assets/people/judge.jpg';
@@ -17,8 +17,15 @@ import jury5Image from '../assets/people/jury5.jpg';
 import opponentImage from '../assets/people/opponent.jpg';
 
 function Room() {
+    const location = useLocation();
     const navigate = useNavigate();
+    const { juryCount, role } = location.state || { juryCount: 5, role: 'defender' }; // Default values
+
     const juryImages = [jury1Image, jury2Image, jury3Image, jury4Image, jury5Image];
+    const juryMembers = Array.from({ length: juryCount }, (_, i) => (
+        <Avatar key={i} src={juryImages[i % juryImages.length]} alt={`AI Jury Member ${i + 1}`} initials={`JY${i + 1}`} className="w-16 h-16 rounded-full shadow-sm" />
+    ));
+
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-100 p-4">
@@ -53,10 +60,7 @@ function Room() {
                     <section id="jury" className="mb-4 text-center">
                         <Heading level={2} className="text-4xl font-bold text-gray-700 mb-4">Jury</Heading>
                         <div className="flex justify-center space-x-6">
-                            {juryImages.map((image, i) => (
-                                <Avatar key={i} src={image} alt={`AI Jury Member ${i + 1}`} initials={`JY${i + 1}`}
-                                        className="w-16 h-16 rounded-full shadow-sm"/>
-                            ))}
+                            {juryMembers}
                         </div>
                     </section>
 
@@ -88,7 +92,8 @@ function Room() {
                         rows="21"
                         readOnly
                         value={`[JUDGE]: Welcome to the courtroom. The case of the People v. Smith is now in session. The defendant is charged with first...
-[DEFENDER]: Your Honor, I would like to present evidence that the defendant was not present at the scene of the crime...`}
+                                        [DEFENDER]: Your Honor, I would like to present evidence that the defendant was not present at the scene of the crime... 
+                                        [DEFENDANT]: The evidence presented by the defender is inadmissible...`}
                     />
                 </Sidebar>
             </div>

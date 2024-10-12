@@ -9,9 +9,11 @@ export const Textarea = forwardRef(function Textarea({ className, resizable = fa
     const formattedText = inputValue.split('\n').map((line, index) => {
         const paddingClass = 'p-1'; // Add padding class here
         if (line.includes('[JUDGE]')) {
-            return <p key={index} className={`text-blue-500 ${paddingClass}`}>{line}</p>;
+            return <p key={index} className={`text-blue-600 ${paddingClass}`}>{line}</p>;
         } else if (line.includes('[DEFENDER]')) {
-            return <p key={index} className={`text-red-500 ${paddingClass}`}>{line}</p>;
+            return <p key={index} className={`text-red-600 ${paddingClass}`}>{line}</p>;
+        } else if (line.includes('[DEFENDANT]')) {
+            return <p key={index} className={`text-green-600 ${paddingClass}`}>{line}</p>;
         } else {
             return <p key={index} className={paddingClass}>{line}</p>;
         }
