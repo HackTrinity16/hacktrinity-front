@@ -27,7 +27,7 @@ function Home() {
     return (
         <div className="flex flex-col min-h-screen bg-gray-100 p-4">
             <h1 className="text-4xl font-bold text-center mb-8">Case Background</h1>
-            <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg min-w-[500px] min-h-[400px]">
+            <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg w-full">
                 <div className="mb-4">
                     <label htmlFor="caseBackground" className="block text-lg font-medium text-gray-700 mb-2">
                         Background of the Case
@@ -49,7 +49,7 @@ function Home() {
                         id="juryCount"
                         type="range"
                         min="1"
-                        max="15"
+                        max="20"
                         value={juryCount}
                         onChange={(e) => setJuryCount(e.target.value)}
                         className="w-full"
@@ -82,21 +82,12 @@ function Home() {
                         <label htmlFor="defendant" className="text-gray-700">Defendant</label>
                     </div>
                 </div>
-                <div className="my-5">
-                    <div>
-                        <input
-                            type="file"
-                            id="document"
-                            onChange={handleFileChange}
-                            className="hidden"
-                        />
-                        <label htmlFor="document"
-                               className="w-full bg-gray-200 text-gray-800 hover:bg-gray-300 cursor-pointer p-3 rounded-lg text-center">
-                            {role === 'defender' ? 'Submit evidence to open the proceeding' : 'Document the defender submitted against you'}
-                        </label>
-                    </div>
+                <div className="mb-1">
+                    <Button color="gray" className="w-full bg-gray-200 text-gray-800 hover:bg-gray-300 mb-1 cursor-pointer">
+                        {role === 'defender' ? 'Submit here the evidence to open the proceeding' : 'Submit the document the defender created against you'}
+                    </Button>
                 </div>
-                <Divider className="my-5 mt-2" />
+                <Divider className="my-5" />
                 <Button type="submit"
                         className="w-full bg-blue-600 text-white hover:bg-blue-700 cursor-pointer p-3 rounded-lg text-center">
                     Start Simulation

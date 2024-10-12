@@ -20,20 +20,12 @@ function Navigation() {
                 {/* Navigation items aligned to the right */}
                 <NavbarSection className="flex items-center gap-6">
                     <NavbarItem
-                                onClick={() => navigate('/room/judge')}>
-                        <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Judge</h2>
+                                onClick={() => navigate('/evidence')}>
+                        <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Evidence Library</h2>
                     </NavbarItem>
                     <NavbarDivider />
                     <NavbarItem href="#jury">
-                        <h2 className="text-gray-800">Jury</h2>
-                    </NavbarItem>
-                    <NavbarDivider />
-                    <NavbarItem href="#defendant">
-                        <h2 className="text-gray-800">Defendant</h2>
-                    </NavbarItem>
-                    <NavbarDivider/>
-                    <NavbarItem href="#defender">
-                        <h2 className="text-gray-800">Defender</h2>
+                        <h2 className="text-gray-800">Other</h2>
                     </NavbarItem>
                 </NavbarSection>
             </Navbar>
