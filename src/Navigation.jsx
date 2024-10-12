@@ -19,12 +19,9 @@ function Navigation() {
 
                 {/* Navigation items aligned to the right */}
                 <NavbarSection className="flex items-center gap-6">
-                    <NavbarItem>
-                        <button
-                            className="text-gray-800 hover:text-blue-600 cursor-pointer"
-                            onClick={() => navigate('/room/judge')}>
-                            Judge
-                        </button>
+                    <NavbarItem
+                                onClick={() => navigate('/room/judge')}>
+                        <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Judge</h2>
                     </NavbarItem>
                     <NavbarDivider />
                     <NavbarItem href="#jury">
