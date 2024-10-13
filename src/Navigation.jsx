@@ -32,16 +32,18 @@ function Navigation() {
                     )}
                 </NavbarSection>
 
-                {/* Navigation items aligned to the right */}
-                <NavbarSection className="flex items-center gap-6">
-                    <NavbarItem onClick={() => navigate('/evidence')}>
-                        <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Evidence Library</h2>
-                    </NavbarItem>
-                    <NavbarDivider />
-                    <NavbarItem onClick={() => navigate('/witnesses')}>
-                        <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Witnesses</h2>
-                    </NavbarItem>
-                </NavbarSection>
+                {/* Conditionally render right navigation items */}
+                {location.pathname !== '/' && (
+                    <NavbarSection className="flex items-center gap-6">
+                        <NavbarItem onClick={() => navigate('/evidence')}>
+                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Evidence Library</h2>
+                        </NavbarItem>
+                        <NavbarDivider />
+                        <NavbarItem onClick={() => navigate('/witnesses')}>
+                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Witnesses</h2>
+                        </NavbarItem>
+                    </NavbarSection>
+                )}
             </Navbar>
         </header>
     );

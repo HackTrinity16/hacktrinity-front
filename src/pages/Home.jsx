@@ -6,8 +6,8 @@ import Modal from '../components/Modal';
 
 function Home() {
     const [caseBackground, setCaseBackground] = useState('');
-    const [role, setRole] = useState('defender');
-    const [juryCount, setJuryCount] = useState(5); // Default number of jury members
+    const [role, setRole] = useState('plaintiff'); // Default role
+    const [juryCount, setJuryCount] = useState(12); // Default number of jury members
     const [document, setDocument] = useState(null);
     const [newDocument, setNewDocument] = useState(null);
     const [isDocumentModalOpen, setIsDocumentModalOpen] = useState(false);
@@ -76,14 +76,14 @@ function Home() {
                     <div className="flex items-center mb-2">
                         <input
                             type="radio"
-                            id="defender"
+                            id="plaintiff"
                             name="role"
-                            value="defender"
-                            checked={role === 'defender'}
+                            value="plaintiff"
+                            checked={role === 'plaintiff'}
                             onChange={(e) => setRole(e.target.value)}
                             className="mr-2"
                         />
-                        <label htmlFor="defender" className="text-gray-700">Defender</label>
+                        <label htmlFor="plaintiff" className="text-gray-700">Plaintiff</label>
                     </div>
                     <div className="flex items-center">
                         <input
@@ -100,7 +100,7 @@ function Home() {
                 </div>
                 <div className="mb-1">
                     <Button color="gray" className="w-full bg-gray-200 text-gray-800 hover:bg-gray-300 mb-1 cursor-pointer" onClick={handleUseDocument}>
-                        {role === 'defender' ? 'Submit here the evidence to open the proceeding' : 'Submit the document the defender created against you'}
+                        {role === 'plaintiff' ? 'Submit here the evidence to open the proceeding' : 'Upload the document the plaintiff submitted against you'}
                     </Button>
                 </div>
                 <Divider className="my-5" />
@@ -110,7 +110,7 @@ function Home() {
             </form>
 
             <Modal isOpen={isDocumentModalOpen} onClose={() => setIsDocumentModalOpen(false)}>
-                <h2 className="text-2xl font-semibold mb-4">{role === 'defender' ? 'Submit here the evidence to open the proceeding' : 'Submit the document the defender created against you'}</h2>
+                <h2 className="text-2xl font-semibold mb-4">{role === 'defender' ? 'Submit here the evidence to open the proceeding' : 'Upload the document the plaintiff submitted against you'}</h2>
                 <form onSubmit={handleDocumentSubmit}>
                     <div className="mb-4">
                         <input
