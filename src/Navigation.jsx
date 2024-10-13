@@ -15,6 +15,12 @@ function Navigation() {
         }
     }, [location]);
 
+    const handleDeleteData = () => {
+        localStorage.removeItem('caseNumber');
+        setCaseNumber(null);
+        navigate('/');
+    };
+
     return (
         <header className="bg-white shadow-md">
             <Navbar className="max-w-screen-lg mx-auto flex justify-between items-center p-4">
@@ -22,7 +28,7 @@ function Navigation() {
                 <NavbarSection className="flex items-center">
                     <button onClick={() => navigate('/')}>
                         <h1 className="text-2xl font-bold text-gray-800">
-                            Atrio Causa
+                            Trial and Error
                         </h1>
                     </button>
                     {caseNumber && (
@@ -36,11 +42,19 @@ function Navigation() {
                 {location.pathname !== '/' && (
                     <NavbarSection className="flex items-center gap-6">
                         <NavbarItem onClick={() => navigate('/evidence')}>
-                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Evidence Library</h2>
+                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">1. Evidence Library</h2>
                         </NavbarItem>
                         <NavbarDivider />
                         <NavbarItem onClick={() => navigate('/witnesses')}>
-                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">Witnesses</h2>
+                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">2. Witnesses</h2>
+                        </NavbarItem>
+                        <NavbarDivider />
+                        <NavbarItem onClick={() => navigate('/room')}>
+                            <h2 className="text-gray-800 hover:text-blue-600 cursor-pointer">3. Court</h2>
+                        </NavbarItem>
+                        <NavbarDivider />
+                        <NavbarItem onClick={handleDeleteData}>
+                            <h2 className="text-red-700 hover:text-blue-600 cursor-pointer">Delete All Data</h2>
                         </NavbarItem>
                     </NavbarSection>
                 )}

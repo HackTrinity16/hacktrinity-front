@@ -60,6 +60,20 @@ function Room() {
         setIsDocumentModalOpen(false);
     };
 
+    const handleDownloadTranscription = () => {
+        const transcription = `[JUDGE]: Welcome to the courtroom. The case of the People v. Smith is now in session. The defendant is charged with first...
+[DEFENDER]: Your Honor, I would like to present evidence that the defendant was not present at the scene of the crime...
+[DEFENDANT]: The evidence presented by the defender is inadmissible...`;
+
+        const blob = new Blob([transcription], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'transcription.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
     // Dynamically create jury members with different avatar sizes
     const juryMembers = Array.from({ length: juryCount }, (_, i) => {
         // Adjust avatar size based on jury count
@@ -140,7 +154,12 @@ function Room() {
                 </div>
 
                 <Sidebar className="w-full lg:w-2/5 bg-gray-50 shadow-lg p-6 rounded-lg ml-0 lg:ml-4">
-                    <h2 className="text-2xl font-semibold mb-6">Case Transcription</h2>
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-2xl font-semibold">Case Transcription</h2>
+                        <Button color="gray" className="bg-gray-200 text-gray-800 hover:bg-gray-300 cursor-pointer" onClick={handleDownloadTranscription}>
+                            Download Transcription
+                        </Button>
+                    </div>
                     <Textarea
                         className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 overflow-y-auto"
                         placeholder="Transcription of the case will appear here..."
@@ -150,7 +169,7 @@ function Room() {
                                         [DEFENDER]: Your Honor, I would like to present evidence that the defendant was not present at the scene of the crime...
                                         [DEFENDANT]: The evidence presented by the defender is inadmissible...`}
                     />
-                    <Button color="gray" className="w-full bg-gray-200 text-gray-800 hover:bg-gray-300 mb-4 cursor-pointer" onClick={handleCallWitness}>Call witness</Button>
+                    <Button color="blue" className="w-full bg-blue-500 text-white hover:bg-gray-300 mb-4 cursor-pointer" onClick={handleCallWitness}>Call witness</Button>
                 </Sidebar>
             </div>
 

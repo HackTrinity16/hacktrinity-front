@@ -83,7 +83,7 @@ function Home() {
                             onChange={(e) => setRole(e.target.value)}
                             className="mr-2"
                         />
-                        <label htmlFor="plaintiff" className="text-gray-700">Plaintiff</label>
+                        <label htmlFor="plaintiff" className="text-gray-700">Plaintiff/Claimant</label>
                     </div>
                     <div className="flex items-center">
                         <input

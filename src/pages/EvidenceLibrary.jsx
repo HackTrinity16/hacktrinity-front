@@ -5,15 +5,17 @@ import { Divider } from '../components/divider';
 function EvidenceLibrary() {
     const [documents, setDocuments] = useState([]);
     const [newDocument, setNewDocument] = useState(null);
+    const [provider, setProvider] = useState('');
 
     const handleFileChange = (e) => {
         setNewDocument(e.target.files[0]);
     };
 
     const handleUpload = () => {
-        if (newDocument) {
-            setDocuments([...documents, newDocument]);
+        if (newDocument && provider) {
+            setDocuments([...documents, { name: newDocument.name, provider }]);
             setNewDocument(null);
+            setProvider('');
         }
     };
 
@@ -35,7 +37,35 @@ function EvidenceLibrary() {
                         {newDocument ? newDocument.name : 'Choose a file to upload'}
                     </label>
                 </div>
-
+                <Divider className="my-5" />
+                <div className="mb-4">
+                    <label className="block text-lg font-medium text-gray-700 mb-2">Document Provided By</label>
+                    <div className="flex items-center mb-2">
+                        <input
+                            type="radio"
+                            id="plaintiff"
+                            name="provider"
+                            value="plaintiff"
+                            checked={provider === 'plaintiff'}
+                            onChange={(e) => setProvider(e.target.value)}
+                            className="mr-2"
+                        />
+                        <label htmlFor="plaintiff" className="text-gray-700">Plaintiff/Claimant</label>
+                    </div>
+                    <div className="flex items-center">
+                        <input
+                            type="radio"
+                            id="defendant"
+                            name="provider"
+                            value="defendant"
+                            checked={provider === 'defendant'}
+                            onChange={(e) => setProvider(e.target.value)}
+                            className="mr-2"
+                        />
+                        <label htmlFor="defendant" className="text-gray-700">Defendant</label>
+                    </div>
+                </div>
+                <Divider className="my-5" />
                 <Button onClick={handleUpload} className="w-full bg-blue-600 text-white hover:bg-blue-700 cursor-pointer mb-4">
                     Upload Document
                 </Button>
@@ -46,7 +76,7 @@ function EvidenceLibrary() {
                 <ul className="list-disc pl-5 space-y-2">
                     {documents.map((doc, index) => (
                         <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow-sm">
-                            <span>{doc.name}</span>
+                            <span>{doc.name} ({doc.provider})</span>
                             <Button color='red' className=" text-white hover:cursor-pointer p-1 rounded-lg">
                                 Delete
                             </Button>

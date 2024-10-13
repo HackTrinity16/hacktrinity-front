@@ -4,7 +4,7 @@ import { Divider } from '../components/divider';
 
 function Witnesses() {
     const [witnesses, setWitnesses] = useState([]);
-    const [newWitness, setNewWitness] = useState({ name: '', testimony: '' });
+    const [newWitness, setNewWitness] = useState({ name: '', testimony: '', party: '' });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -12,9 +12,9 @@ function Witnesses() {
     };
 
     const handleAddWitness = () => {
-        if (newWitness.name && newWitness.testimony) {
+        if (newWitness.name && newWitness.testimony && newWitness.party) {
             setWitnesses([...witnesses, newWitness]);
-            setNewWitness({ name: '', testimony: '' });
+            setNewWitness({ name: '', testimony: '', party: '' });
         }
     };
 
@@ -49,7 +49,35 @@ function Witnesses() {
                         rows="4"
                     ></textarea>
                 </div>
-
+                <Divider className="my-5" />
+                <div className="mb-4">
+                    <label className="block text-lg font-medium text-gray-700 mb-2">Witness called by</label>
+                    <div className="flex items-center mb-2">
+                        <input
+                            type="radio"
+                            id="plaintiff"
+                            name="party"
+                            value="plaintiff"
+                            checked={newWitness.party === 'plaintiff'}
+                            onChange={handleInputChange}
+                            className="mr-2"
+                        />
+                        <label htmlFor="plaintiff" className="text-gray-700">Plaintiff/Claimant</label>
+                    </div>
+                    <div className="flex items-center">
+                        <input
+                            type="radio"
+                            id="defendant"
+                            name="party"
+                            value="defendant"
+                            checked={newWitness.party === 'defendant'}
+                            onChange={handleInputChange}
+                            className="mr-2"
+                        />
+                        <label htmlFor="defendant" className="text-gray-700">Defendant</label>
+                    </div>
+                </div>
+                <Divider className="my-5" />
                 <Button onClick={handleAddWitness} className="w-full bg-blue-600 text-white hover:bg-blue-700 cursor-pointer mb-4">
                     Add Witness
                 </Button>
@@ -61,7 +89,7 @@ function Witnesses() {
                     {witnesses.map((witness, index) => (
                         <li key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded-lg shadow-sm">
                             <div>
-                                <strong>{witness.name}</strong>: {witness.testimony}
+                                <strong>{witness.name}</strong>: {witness.testimony} ({witness.party})
                             </div>
                             <Button color='red' onClick={() => handleRemoveWitness(index)} className="text-white hover: cursor-pointer p-1 rounded-lg">
                                 Remove
