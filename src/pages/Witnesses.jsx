@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from '../components/button';
 import { Divider } from '../components/divider';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:8080');
 
 function Witnesses() {
     const [witnesses, setWitnesses] = useState([]);
@@ -18,8 +21,16 @@ function Witnesses() {
         }
     };
 
-    const handleRemoveWitness = (index) => {
-        setWitnesses(witnesses.filter((_, i) => i !== index));
+    const handleSubmitWitness = () => {
+        const witness_name = prompt("Enter witness name:");
+        const username = 'your_username'; // Replace with actual username
+        const trial_id = 'your_trial_id'; // Replace with actual trial ID
+        socket.emit('submit_action', {
+            username,
+            trial_id,
+            action_type: 'call_witness',
+            witness_name
+        });
     };
 
     return (
@@ -49,9 +60,9 @@ function Witnesses() {
                         rows="4"
                     ></textarea>
                 </div>
-                <Divider className="my-5" />
+
                 <div className="mb-4">
-                    <label className="block text-lg font-medium text-gray-700 mb-2">Witness called by</label>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">Witness For</label>
                     <div className="flex items-center mb-2">
                         <input
                             type="radio"
@@ -77,9 +88,13 @@ function Witnesses() {
                         <label htmlFor="defendant" className="text-gray-700">Defendant</label>
                     </div>
                 </div>
-                <Divider className="my-5" />
+
                 <Button onClick={handleAddWitness} className="w-full bg-blue-600 text-white hover:bg-blue-700 cursor-pointer mb-4">
                     Add Witness
+                </Button>
+
+                <Button onClick={handleSubmitWitness} className="w-full bg-green-600 text-white hover:bg-green-700 cursor-pointer mb-4">
+                    Submit Witness
                 </Button>
 
                 <Divider className="my-5 mt-2" />

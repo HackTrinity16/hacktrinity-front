@@ -1,3 +1,4 @@
+// Define the base URL for the API
 const API_BASE_URL = 'http://localhost:8080';
 
 // Function to handle GET requests
@@ -15,6 +16,7 @@ export const getData = async (endpoint) => {
     }
 };
 
+// Function to handle POST requests
 export const postData = async (endpoint, payload) => {
     try {
         const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
@@ -35,10 +37,11 @@ export const postData = async (endpoint, payload) => {
     }
 };
 
+// Function to create a new trial
 export const createTrial = async (description) => {
     const payload = {
-        "username1": "Plaintiff",
-        "username2": "Defendant",
+        username1: "Plaintiff",
+        username2: "Defendant",
         description
     };
     try {
@@ -50,6 +53,7 @@ export const createTrial = async (description) => {
     }
 };
 
+// Function to open the trial page in a new tab
 export const openTrialPage = (trialId, username) => {
     const url = `${API_BASE_URL}/trial?trial_id=${trialId}&username=${username}`;
     window.open(url, '_blank');

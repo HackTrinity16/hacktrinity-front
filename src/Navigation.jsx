@@ -17,7 +17,9 @@ function Navigation() {
 
     const handleDeleteData = () => {
         localStorage.removeItem('caseNumber');
+        localStorage.removeItem('trialData');
         setCaseNumber(null);
+        alert('The data of the current case has been deleted.');
         navigate('/');
     };
 
@@ -57,6 +59,11 @@ function Navigation() {
                             <h2 className="text-red-700 hover:text-blue-600 cursor-pointer">Delete All Data</h2>
                         </NavbarItem>
                     </NavbarSection>
+                )}
+                {location.pathname === '/' && caseNumber && (
+                    <NavbarItem onClick={handleDeleteData}>
+                        <h2 className="text-red-700 hover:text-blue-600 cursor-pointer">Delete All Data</h2>
+                    </NavbarItem>
                 )}
             </Navbar>
         </header>

@@ -31,15 +31,11 @@ function Room() {
     const [selectedDocument, setSelectedDocument] = useState(null);
 
     const witnesses = [
-        { name: 'Witness 1', testimony: 'Testimony 1' },
-        { name: 'Witness 2', testimony: 'Testimony 2' },
-        { name: 'Witness 3', testimony: 'Testimony 3' },
+        { name: 'Ms. Jones wife', testimony: 'I saw...' },
     ];
 
     const documents = [
-        { name: 'Document 1', content: 'Content 1' },
-        { name: 'Document 2', content: 'Content 2' },
-        { name: 'Document 3', content: 'Content 3' },
+        { name: 'Photo of Mr. Jones brother´s keys', content: 'photo.jpg' },
     ];
 
     const handleCallWitness = () => {
@@ -142,12 +138,12 @@ function Room() {
                             <div className="flex flex-col items-center">
                                 <Avatar src={personImage} alt="Defendant" initials="P"
                                         className="w-28 h-28 mb-4 border-4 border-green-500 shadow-lg"/>
-                                <p className="text-lg text-gray-600">Defendant (You)</p>
+                                <p className="text-lg text-gray-600">Defendant</p>
                             </div>
                             <div className="flex flex-col items-center">
                                 <Avatar src={opponentImage} alt="Defender" initials="O"
                                         className="w-28 h-28 mb-4 border-4 border-red-500 shadow-lg"/>
-                                <p className="text-lg text-gray-600">Defender</p>
+                                <p className="text-lg text-gray-600">Plaintiff</p>
                             </div>
                         </div>
                     </section>
@@ -165,7 +161,7 @@ function Room() {
                         placeholder="Transcription of the case will appear here..."
                         rows="21"
                         readOnly
-                        value={`[JUDGE]: Welcome to the courtroom. The case of the People v. Smith is now in session. The defendant is charged with first...
+                        value={`[JUDGE]: Welcome to the courtroom. The case of the People v. Jones is now in session. The defendant is charged with first...
                                         [DEFENDER]: Your Honor, I would like to present evidence that the defendant was not present at the scene of the crime...
                                         [DEFENDANT]: The evidence presented by the defender is inadmissible...`}
                     />

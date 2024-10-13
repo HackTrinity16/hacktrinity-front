@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/button';
 import { Divider } from '../components/divider.jsx';
 import Modal from '../components/Modal';
+import { createTrial } from '../services/judge';
 
 function Home() {
     const [caseBackground, setCaseBackground] = useState('');
@@ -13,16 +14,21 @@ function Home() {
     const [isDocumentModalOpen, setIsDocumentModalOpen] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        const caseNumber = Math.floor(Math.random() * 1000);
-        localStorage.setItem('caseNumber', caseNumber + '/2024');
-        console.log('Case Background:', caseBackground);
-        console.log('Selected Role:', role);
-        console.log('Number of Jury Members:', juryCount);
-        console.log('Uploaded Document:', document);
-        navigate('/evidence', { state: { caseBackground, juryCount, role, document } });
+        try {
+            const trialData = await createTrial(caseBackground);
+            const caseNumber = trialData.trial_id;
+            localStorage.setItem('caseNumber', caseNumber.substr(caseNumber.length - 5).toUpperCase() + '/24');
+            localStorage.setItem('trialData', caseNumber);
+            console.log('Case Background:', caseBackground);
+            console.log('Selected Role:', role);
+            console.log('Number of Jury Members:', juryCount);
+            console.log('Uploaded Document:', document);
+            navigate('/evidence', { state: { caseBackground, juryCount, role, document } });
+        } catch (error) {
+            console.error('Error creating trial:', error);
+        }
     };
 
     const handleUseDocument = () => {
@@ -35,7 +41,6 @@ function Home() {
 
     const handleDocumentSubmit = (e) => {
         e.preventDefault();
-        // Handle document submission logic here
         setDocument(newDocument);
         setIsDocumentModalOpen(false);
     };
@@ -104,7 +109,7 @@ function Home() {
                     </Button>
                 </div>
                 <Divider className="my-5" />
-                <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-700 cursor-pointer p-3 rounded-lg text-center">
+                <Button type="submit" className="w-full text-white hover: cursor-pointer p-3 rounded-lg text-center">
                     Start Simulation
                 </Button>
             </form>
